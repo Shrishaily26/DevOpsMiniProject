@@ -3,17 +3,22 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                echo 'Repository cloned successfully'
+                echo 'Code downloaded from GitHub'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Build successful'
+                echo 'Docker image build stage'
             }
         }
 
+        stage('Deploy') {
+            steps {
+                echo 'Application deployment stage'
+            }
+        }
     }
 }
