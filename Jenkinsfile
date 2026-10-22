@@ -3,21 +3,22 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Code downloaded from GitHub'
+                sh 'docker build -t devops-mini-project .'
             }
         }
 
-        stage('Build') {
+        stage('Stop Old Container') {
             steps {
-                echo 'Docker image build stage'
+                sh 'docker stop devops-container || true'
+                sh 'docker rm devops-container || true'
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy New Container') {
             steps {
-                echo 'Application deployment stage'
+                sh 'docker run -d -p 5000:5000 --name devops-container devops-mini-project'
             }
         }
     }
